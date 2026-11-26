@@ -20,3 +20,6 @@ universal-ai-vision.zip
 **/.idea/
 *.elf
 *.o
+
+# other projects / large files
+weights/
