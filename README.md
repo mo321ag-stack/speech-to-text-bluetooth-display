@@ -88,7 +88,7 @@ flowchart LR
 
 ## 📘 Technical report
 
-A 44-page report covering background, design, firmware, protocol, app, tests and references: **[PDF](Speech_To_Text_Bluetooth_Display/Documentation/Technical_Report.pdf)** · [DOCX](Speech_To_Text_Bluetooth_Display/Documentation/Technical_Report.docx).
+A 45-page report covering background, design, firmware, protocol, app, tests and references: **[PDF](Speech_To_Text_Bluetooth_Display/Documentation/Technical_Report.pdf)** · [DOCX](Speech_To_Text_Bluetooth_Display/Documentation/Technical_Report.docx).
 
 ## 🔌 Hardware
 
