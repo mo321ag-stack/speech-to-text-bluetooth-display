@@ -35,6 +35,38 @@ An Android app recognises (and optionally translates) your speech and sends it o
 | 📱 **Live preview** | The app shows exactly what the LCD will display, page by page |
 | 🧰 **Rescue programmer** | ESP32 ArduinoISP sketch with a clock output that revives an AVR whose fuses point to a dead crystal |
 
+## 🌍 Languages & translation
+
+### How it works
+
+```mermaid
+flowchart LR
+    A[🎙️ Speak<br/>any of 59 languages] --> B[Recognized text<br/>editable]
+    B --> C{Translate?}
+    C -- no --> E
+    C -- yes --> D[ML Kit on-device<br/>language ID + translation]
+    D -. model missing / error .-> D2[Online fallback<br/>MyMemory]
+    D --> E[LCD conversion<br/>shape · transliterate · rasterise]
+    D2 --> E
+    E --> F[📟 16×2 LCD]
+```
+
+1. **Speech language:** choose from the 59 languages, or **Mix (Arabic + English)**. Mix uses Android 14+ language switching, with on-device recognition.
+2. **Translate before sending** (optional): the source language is detected automatically with ML Kit Language ID, and you pick any target language.
+   - **On-device (default):** Google ML Kit Translation. Each language model is downloaded once (about 30 MB), then translation works **offline**, with no API key.
+   - **Online fallback:** if the on-device path fails (no Google Play services, model download blocked), the app uses the MyMemory API. The text is sent over the internet in that case, and the app says so.
+   - The translated text stays editable before sending.
+3. **LCD conversion:** each language is shown in the best way the HD44780 allows:
+
+| LCD rendering | Quality | Languages |
+|---|---|---|
+| **Native ASCII** (accents removed: é→e, ß→ss) | ✅ Perfect, no page limit | English (English), French (Français), Spanish (Español), German (Deutsch), Italian (Italiano), Portuguese (Português), Turkish (Türkçe), Dutch (Nederlands), Swedish (Svenska), Norwegian (Norsk), Danish (Dansk), Finnish (Suomi), Polish (Polski), Czech (Čeština), Slovak (Slovenčina), Romanian (Română), Hungarian (Magyar), Croatian (Hrvatski), Slovenian (Slovenščina), Lithuanian (Lietuvių), Latvian (Latviešu), Estonian (Eesti), Indonesian (Bahasa Indonesia), Malay (Bahasa Melayu), Vietnamese (Tiếng Việt), Filipino (Filipino), Swahili (Kiswahili), Afrikaans (Afrikaans), Albanian (Shqip), Catalan (Català), Galician (Galego), Irish (Gaeilge), Welsh (Cymraeg), Icelandic (Íslenska), Maltese (Malti), Esperanto (Esperanto), Haitian Creole (Kreyòl) |
+| **Transliterated to Latin** (Привет→Privet, Γειά→Geia) | ✅ Readable, no page limit | Russian (Русский), Ukrainian (Українська), Greek (Ελληνικά), Bulgarian (Български), Belarusian (Беларуская), Macedonian (Македонски) |
+| **Custom glyphs** (shaped, right-to-left) | 🟡 Good, max 8 different letter shapes per screen | Arabic (العربية), Persian (فارسی), Urdu (اردو) |
+| **Auto-rasterised** into 5×8 px | 🟠 Limited legibility | Chinese (中文), Japanese (日本語), Korean (한국어), Hindi (हिन्दी), Hebrew (עברית), Bengali (বাংলা), Tamil (தமிழ்), Telugu (తెలుగు), Marathi (मराठी), Gujarati (ગુજરાતી), Kannada (ಕನ್ನಡ), Thai (ไทย), Georgian (ქართული) |
+
+The app's live preview shows which of these applies and exactly what the LCD will display.
+
 ## 🏗️ Architecture
 
 ```mermaid

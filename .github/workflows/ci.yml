@@ -13,12 +13,12 @@ jobs:
       run:
         working-directory: Speech_To_Text_Bluetooth_Display/Firmware
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install AVR toolchain
         run: sudo apt-get update && sudo apt-get install -y gcc-avr avr-libc binutils-avr
       - name: Build (warnings are errors)
         run: make
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: bt_display-hex
           path: Speech_To_Text_Bluetooth_Display/Firmware/bt_display.hex
@@ -30,7 +30,7 @@ jobs:
       run:
         working-directory: Speech_To_Text_Bluetooth_Display/Mobile_App/speech_bt_display
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
