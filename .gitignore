@@ -1,0 +1,22 @@
+# other projects in this folder
+universal-ai-vision/
+universal-ai-vision.zip
+.claude/
+
+# secrets / private
+**/secrets.h
+**/.env
+**/chat_backup.zip
+*.zip
+**/local.properties
+*.jks
+*.keystore
+
+# build outputs (APKs are published as GitHub Release assets)
+*.apk
+**/build/
+**/.dart_tool/
+**/.gradle/
+**/.idea/
+*.elf
+*.o
