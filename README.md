@@ -86,6 +86,10 @@ flowchart LR
 
 **Why the phone does the Arabic work:** an HD44780 has no Arabic font and only **8 user-defined characters on screen at once**. The app shapes the text, orders it right to left, splits it into pages with at most 8 distinct glyphs each, and sends the glyph bitmaps with the cell codes. The ATmega stores up to 8 pages, loads each page's glyphs into CGRAM and cycles through them. English is sent as plain text, and the MCU word-wraps it itself. Details: [docs/PROTOCOL.md](docs/PROTOCOL.md).
 
+## 📘 Technical report
+
+A 44-page report covering background, design, firmware, protocol, app, tests and references: **[PDF](Speech_To_Text_Bluetooth_Display/Documentation/Technical_Report.pdf)** · [DOCX](Speech_To_Text_Bluetooth_Display/Documentation/Technical_Report.docx).
+
 ## 🔌 Hardware
 
 | Part | Notes |
